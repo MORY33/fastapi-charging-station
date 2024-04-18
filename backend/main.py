@@ -4,7 +4,9 @@ from sqlalchemy.exc import OperationalError
 from starlette.responses import RedirectResponse
 from src.config.config import APP_NAME, VERSION
 from src.routes.users import router as user_router
+from src.routes.stations import router as charging_stations_router
 from src.util.dependencies import get_db
+from src.config.logger import setup_logger
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 
@@ -14,7 +16,10 @@ app = FastAPI(
     version=VERSION
 )
 
+setup_logger()
+
 app.include_router(user_router)
+app.include_router(charging_stations_router)
 
 app.add_middleware(
     CORSMiddleware,
