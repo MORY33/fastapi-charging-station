@@ -18,8 +18,8 @@ app = FastAPI(
 
 setup_logger()
 
-app.include_router(user_router)
-app.include_router(charging_stations_router)
+app.include_router(user_router, tags=["users"])
+app.include_router(charging_stations_router, tags=["charging_stations"])
 
 app.add_middleware(
     CORSMiddleware,
